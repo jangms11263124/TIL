@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    {% for article in articles %}
+      <div>
+        <a href="{% url "articles:detail" article.pk %}"> {{ article.pk }}</a>
+        <p> {{ article.title }}</p>
+        <p> {{ article.content }}</p>
+        <p> {{ article.created_at }}</p>
+        <p> {{ article.updated_at }}</p>
+        <form action="{% url "articles:likes" article.pk %}" method="POST">
+          {% csrf_token %}
+          {% if request.user not in article.like_users.all %}
+            <input type="submit" value="좋아요 추가">
+          {% elif request.user in article.like_users.all %}
+            <input type="submit" value="좋아요 삭제">
+          {% endif %}
+        </form>
+        <p> {{ article.like_users.all|length }}명이 좋아해요. </p>
+        <hr>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock content %}

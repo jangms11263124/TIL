@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if request.resolver_match.view_name == 'articles:create' %}
+    <h2>게시글 생성 articles:create</h2>
+    <form action="{% url "articles:create" %}" method="POST">
+  {% elif request.resolver_match.view_name == 'articles:update' %}
+    <h2>게시글 수정 articles:update</h2>
+    <form action="{% url "articles:update" article.pk %}" method="POST">
+  {% endif %}
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="제출">
+  </form>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ person.username }}의 프로필
+  {% if request.user != person %}
+    <form action="{% url "accounts:follow" person.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user not in person.followers.all %}
+        <input type="submit" value="팔로잉 추가">
+      {% else %}
+        <input type="submit" value="팔로잉 취소">
+      {% endif %}
+    </form>
+  {% endif %}
+
+  <p>{{ person.username }}이 팔로잉하는 수: {{ person.followings.all|length }}</p>
+  <p>{{ person.username }}의 팔로워 수: {{ person.followers.all|length }}</p>
+{% endblock content %}

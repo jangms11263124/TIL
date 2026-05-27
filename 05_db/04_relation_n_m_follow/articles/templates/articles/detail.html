@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <p> {{ article.user }}</p>
+    <p> {{ article.title }}</p>
+    <p> {{ article.content }}</p>
+    <p> {{ article.created_at }}</p>
+    <p> {{ article.updated_at }}</p>
+    <a href="{% url "articles:update" article.pk %}">게시글 수정</a>
+    <form action="{% url "articles:delete" article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="게시글 삭제">
+    </form>
+    <form action="{% url "articles:likes" article.pk %}" method="POST">
+      {% csrf_token %}
+      {% comment %} # 좋아요 누르기 할려면 
+      # 게시글에 좋아요 누른 사람에 내가 없어야함  {% endcomment %}
+      {% if request.user not in article.like_users.all %}
+        <input type="submit" value="좋아요 추가">
+      {% comment %} # 좋아요 취소 할려면
+      # 게시글에 좋아요 누른 사람에 내가 있어야 함  {% endcomment %}
+      {% else %}
+        <input type="submit" value="좋아요 취소">
+      {% endif %}
+    </form>
+    <p>{{ article.like_users.all | length }}명이 좋아합니다. </p>
+    <form action="{% url "articles:comment_create" article.pk%}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit" value="댓글 생성">
+    </form>
+    <ul>
+      {% for comment in comments %}
+        <li> {{ comment.pk }}.{{ comment.user }} - {{ comment.content }} </li>
+      {% endfor %}
+    </ul>
+    <hr>
+    <a href="{% url "articles:index" %}">홈으로</a>
+  </div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if request.resolver_match.view_name == 'accounts:signup' %}
+    <h2>회원가입 accounts:signup</h2>
+    <form action="{% url "accounts:signup" %}" method="POST">
+  {% elif request.resolver_match.view_name == 'accounts:login' %}
+    <h2>로그인 accounts:login</h2>
+    <form action="{% url "accounts:login" %}" method="POST">
+  {% endif %}
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="제출">
+  </form>
+{% endblock content %}

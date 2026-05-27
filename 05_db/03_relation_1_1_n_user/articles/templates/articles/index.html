@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    {% for article in articles %}
+      <div>
+        <a href="{% url "articles:detail" article.pk %}"> {{ article.pk }}</a>
+        <p> 작성자: {{ article.user }}</p>
+        <p> 제목: {{ article.title }}</p>
+        <p> 내용: {{ article.content }}</p>
+        <p> 생성일: {{ article.created_at }}</p>
+        <p> 수정일: {{ article.updated_at }}</p>
+        <hr>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock content %}
