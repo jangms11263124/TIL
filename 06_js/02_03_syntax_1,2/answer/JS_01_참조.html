@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_참조</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+      
+      body {
+        font-family: "IBM Plex Sans", sans-serif;
+      }
+
+      .buttons {
+        display: flex;
+        width: 30%;
+        justify-content: space-between;
+      }
+
+
+  </style>
+</head>
+<body>
+  <h1 id="greeting">hello ssafy</h1>
+  <div class="buttons">
+    <button onclick="myFunction1()">내부 스크립트</button>
+    <button onclick="myFunction2()">외부 스크립트</button>
+    <button onclick="myFunction34()">js파일</button>
+    <button onclick="refresh()">refresh</button>
+  </div>
+
+  <!-- 1. script 내부 스크립트  - live server로 실행 -->
+  <script>
+    function myFunction1() {
+      document.getElementById("greeting").innerText = "1. 내부 스크립트는 live server로 실행 가능";
+    }
+
+    function refresh() {
+      location.reload(true);
+    }
+
+    function myFunction34() {
+      document.getElementById("greeting").innerHTML 
+      = "js 파일은 2가지 방법 존재: <br> <ol start=3> <li>Code Runner 확장 플러그인</li> <li>node.js로 실행</li></ol>";
+    }
+  </script>
+
+  <!-- 2. script 외부 스크립트 - live server로 -->
+  <!-- .js를 확장자로 가진 파일 -->
+  <!-- src 속성에 외부 파일의 위치를 값으로 작성 -->
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>

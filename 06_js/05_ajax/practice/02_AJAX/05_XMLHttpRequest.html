@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSON 파일 이용</title>
+  </head>
+
+  <body>
+    <h1>JSON 파일을 읽어 멤버를 호출해보자</h1>
+    <textarea id="student" cols="30" rows="10"></textarea>
+    <input type="button" value="출석" onclick="requestMsg()" />
+    <script>
+      //껍데기
+      let xhr
+
+      //textarea 태그를 가지고 왔다.
+      let studentArea = document.getElementById('student')
+
+      function requestMsg() {
+        // 코드를 작성하세요. 
+      }
+
+      function callbackFunc() {
+        //완벽하게 통신이 끝났을때
+        if (xhr.readyState == 4) {
+          //OK
+          if (xhr.status == 200) {
+            //JSON 파일을 읽어왔따. (얘는 어차피 문자열~~)
+            console.log(xhr.response)
+            let stList = JSON.parse(xhr.response)
+            console.log(stList)
+            studentArea.value += '총학생수 : ' + stList.length + '명\n'
+            for (let i = 0; i < stList.length; i++) {
+              let st = stList[i]
+              studentArea.value += `#${st.id}. ${st.name}\n`
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const URL = 'https://jsonplaceholder.typicode.com/todos/1'
+
+    //AJAX 통신 시작
+    const xhr = new XMLHttpRequest()
+
+    //xhr 보내기 위해서 open 메서드를 활용
+    xhr.open('GET', URL)
+    
+    //요청 보내기
+    xhr.send() 
+
+    
+    xhr.onreadystatechange = function() {
+      if(xhr.readyState == xhr.DONE){
+        if(xhr.status == 200 ){
+          const todo = xhr.response
+          console.log(todo)
+        }
+      }
+    }
+
+    // xhr.onload = function () {
+    //   if (xhr.status == 200) {
+    //     const todo = xhr.response
+    //     console.log(todo)
+    //   }
+    // }
+  </script>
+</body>
+
+</html>

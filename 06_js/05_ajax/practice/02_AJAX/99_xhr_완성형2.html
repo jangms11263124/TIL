@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="myBtn" type="button" value="서버에 자료요청">
+  <span id="msg"></span>
+
+  <script>
+    const myBtn = document.getElementById("myBtn")
+
+    myBtn.addEventListener("click", requestMsg)
+
+    function requestMsg(){
+      var xhr = new XMLHttpRequest()
+      console.log(xhr)
+      console.log("UNSENT", xhr.readyState) // readyState: 0
+    
+      xhr.onreadystatechange = responseMsg
+        
+      xhr.open("GET", "./data/profile.json", true);
+      console.log('OPENED', xhr.readyState) // readyState: 1
+
+      xhr.send(null);
+      console.log('*STILL OPENED', xhr.readyState) // readyState: 1
+      
+      
+      function responseMsg() {
+        console.log(xhr.readyState) 
+        // readyState: 2
+        // readyState: 3
+        // readyState: 4
+
+        if (xhr.readyState == 4) {
+        console.log('DONE', xhr.readyState) // readyState: 4
+
+        if (xhr.status == 200) {
+          var msg = document.getElementById("msg");
+          msg.innerHTML += xhr.responseText;
+        }
+      }
+    }
+}
+  </script>
+</body>
+</html>

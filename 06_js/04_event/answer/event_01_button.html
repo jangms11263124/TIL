@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- <button id="myBtn">+</button> -->
+    <a id="myBtn" class="btn btn-primary">+</a>
+    <p id="cnt">0</p>
+  </div>
+
+
+  <script>
+    // 초기값
+    let cntNum = 0
+
+    // id가 btn인 요소를 선택
+    const btn = document.querySelector('#myBtn')
+
+
+    // 방법 1. increaseFun 함수를 만들어서 addEventListener에 추가
+
+    // // 1-a. increaseFun 함수 선언
+    // const increaseFun = function() {
+    //   console.log('버튼 클릭!')
+
+    //   // 1-b. 함수가 실행됐을때 cntNum의 값에 +1
+    //   cntNum += 1
+
+    //   // 1-c. 증가된 값을 프론트에 반영해주기 위해서 #cnt 요소 선택
+    //   const cnt = document.querySelector('#cnt')
+
+    //   // 1-d. 선택된 #cnt 요소의 innerText값 변경
+    //   cnt.innerText = cntNum
+    // }
+
+    // // 1-e. btn 요소에 addEventListener에 'click' 이벤트가 실행됐을 때 increaseFun이 동작
+    // btn.addEventListener('click', increaseFun)
+    
+
+    // 방법 2. addEvenetListener에 함수를 생성
+    
+    // 2-a. btn  요소에 addEventListener에 'click'
+    btn.addEventListener('click', function() { // btn이 'click' 되었을 때마다 함수가 실행됨
+      console.log('버튼 클릭!')
+
+      // 방법 1과 b,c,d는 동일
+      // 2-b. 함수가 실행됐을때 cntNum의 값에 +1
+      cntNum += 1
+
+      // 2-c. 증가된 값을 프론트에 반영해주기 위해서 #cnt 요소 선택
+      const cnt = document.querySelector('#cnt')
+
+      // 2-d. 선택된 #cnt 요소의 innerText값 변경
+      cnt.innerText = cntNum
+    })
+    
+  </script>
+</body>
+</html>

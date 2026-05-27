@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="parents" style="background-color: pink; display:inline-block;">
+    <div id="child">1</div>
+  </div>
+  <script>
+    // 코드를 작성하시오.
+
+    // element: getElementById - parents
+    const parent = document.querySelector('#parents')
+
+    // child: getElementById - child
+    const child = document.querySelector('#child')
+
+    // away: removeChild - child
+    console.log(parent.removeChild(child))
+
+    // const element = document.getElementById("parents")
+    // const child = document.getElementById("child")
+    // const away = parents.removeChild(child)
+  </script>
+</body>
+</html>

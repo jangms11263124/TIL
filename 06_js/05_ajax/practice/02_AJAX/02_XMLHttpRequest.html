@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const URL = 'https://jsonplaceholder.typicode.com/todos/1'
+
+    //AJAX 통신 시작
+    const myXhr = new XMLHttpRequest()
+
+    //xhr 보내기 위해서 open 메서드를 활용
+    myXhr.open('GET', URL)
+    
+    //요청 보내기
+    myXhr.send() 
+    
+
+    console.log(myXhr)
+    console.log(myXhr.readyState)
+    const todo = myXhr.response 
+    console.log(todo)
+    
+    
+
+  </script>
+</body>
+
+</html>

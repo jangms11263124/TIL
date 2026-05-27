@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="classic" type="button" value="고전-서버에 자료 요청" onclick="responseMsg()">
+
+  <span id="msg"></span>
+  <script>
+    // 1. 클라이언트 이벤트 발생
+    const stdBtn = document.getElementById("standard")
+
+    // 2. XMLHttpRequest 객체 생성
+    var xhr = new XMLHttpRequest()
+    console.log(xhr)
+    console.log('UNSENT', xhr.readyState) // readyState: 0
+    
+    // 3. XMLHttpRequest 콜백함수 설정
+    xhr.onreadystatechange = responseMsg;
+    
+    // 4. XMLHttpRequest 객체를 통한 비동기화 요청
+    xhr.open("GET", "./profile.json", true)
+    console.log('OPENED', xhr.readyState) // readyState: 1
+    
+    console.log(xhr)
+    xhr.send(null)
+    console.log('HEADERS_RECEIVED', xhr.readyState) // readyState: 2
+
+    // 5,6,7. 서버 응답 결과를 처리할 콜백함수 호출
+    function responseMsg() {
+      if (xhr.readyState == 4 && xhr.state == 200) {
+        var msg = document.getElementById("msg")
+        msg.innerText += xhr.responseText
+        console.log(xhr.responseText)
+      }
+    }
+
+  </script>
+</body>
+</html>
