@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ name }}</h1>
+{% for article in articles %}
+  {{ article.title }} 
+  {{ article.content }}
+  {{ article.created_at }}
+  {{ ariicle.updated_at }}
+{% endfor %}
+{% endblock content %}

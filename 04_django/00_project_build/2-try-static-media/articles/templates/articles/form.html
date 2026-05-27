@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block gumi02 %}
+  <h2>forms.html</h2>
+  <h3>
+  {% if request.resolver_match.view_name == 'articles:create' %}
+    create 입니다.
+  {% elif request.resolver_match.view_name == 'articles:update' %}
+    update
+  {% endif %}
+
+  </h3>
+  {% if request.resolver_match.view_name == 'articles:create' %}
+    <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+  {% elif request.resolver_match.view_name == 'articles:update' %}
+    <form action="{% url 'articles:update' article.pk %}" method="POST" enctype="multipart/form-data">
+  {% endif %}
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="submit">
+    </form>
+{% endblock gumi02 %}

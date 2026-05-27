@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block gumi02 %}
+ <h2>#{{ person.pk }}detail.html</h2>
+  <div>
+    <span>{{ person.title }}</span>
+    <span>{{ person.content }}</span>
+    <img src="{{ person.image.url }}" alt="{{ person.image }}" style="width: 20rem;">
+    <form action="{% url 'articles:delete' person.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="delete">
+    </form>
+    <a href="{% url 'articles:update' person.pk %}">update</a>
+  </div>
+  <a href="{% url 'articles:index' %}">index</a>
+{% endblock gumi02 %}

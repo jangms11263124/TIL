@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block gumi02 %}
+  <h2>index 입니다.</h2>
+  {{ request.user }}
+
+  {% for user in users %}
+    {{ user.username }}
+    {{ user.created_at }}
+  {% endfor %}
+{% endblock gumi02 %}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% include 'articles/_nav.html' %}
+  <h1>네비게이션 바 </h1>
+  <!-- base.html에서는 block 태그를 만들어주고 이름도 잘 기억하기-->
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>

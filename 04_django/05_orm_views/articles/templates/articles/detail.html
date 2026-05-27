@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>DETAIL</h2>
+<h3>{{ article.pk }}번째 게시글 </h3>
+<ol>
+  <li>id: {{ article.pk }}</li>
+  <li>제목: {{ article.title }}</li>
+  <li>내용: {{ article.content }}</li>
+  <li>작성일: {{ article.created_at }}</li>
+  <li>수정일: {{ article.updated_at }}</li>
+</ol>
+
+<a href="{% url "articles:index" %}">index로</a>
+<a href="{% url "articles:edit" article.pk %}">edit</a>
+<a href="{% url "articles:delete" article.pk%}">delete</a>
+<form action="{% url "articles:delete" article.pk%}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="delete">
+  {% comment %} <button>delete</button> {% endcomment %}
+  {% comment %} form 태그 안에는 1개의 전송이 있어야 한다. 
+
+  input type="submit", "button"
+  button 기본 타입은 submit {% endcomment %}
+
+</form>
+{% endblock content %}
+
+

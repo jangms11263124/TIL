@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% comment %} <form action="#" method="GET"> {% endcomment %}
+  {% comment %} <form action="{% url "articles:create" %}" method="GET"> {% endcomment %}
+  <form action="{% url "articles:create" %}" method="POST">
+    {% csrf_token %}
+    {% comment %} 403 foribben {% endcomment %}
+    <input type="text" name="title" placeholder="미리보기입니다.">
+    <textarea name="content"></textarea>
+    <input type="submit" value="submit">
+
+    x: label 
+    ?name1=지혜&area=구미
+    o: input - name1=지혜 내가 정보를 전달해주는 주머니 직접적으로 값이 들어가야함
+            - * 'name' 속성에다가 value를 어떤 이름으로 전달하지 지정해줌
+                * name="name1"
+            - 'value' 진짜 실제 값을 미리 넣어놓는 것  
+            - 'placeholder' 미리보기
+
+            - 'id' - label의 'for' 지금 내가 보여주는 input이 어떤 거랑 짝꿍 알려주는 것 
+  </form>
+
+{% endblock content %}

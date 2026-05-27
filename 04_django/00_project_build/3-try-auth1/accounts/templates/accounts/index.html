@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  {% if request.user.is_authenticated %}
+    {{ request.user.username }}
+  {% else %}
+    로그인부터 해주세요. 
+    <a href="{% url "accounts:login" %}">login</a>
+  {% endif %}
+  
+{% endblock content %}
+

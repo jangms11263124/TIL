@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block gumi02 %}
+    <h2>index.html</h2>
+    {% if requets.user.is_authenticated %}
+      <a href="{% url 'articles:create' %}">create</a>
+    {% else %}
+      <a href="{% url "accounts:login" %}">login</a>
+    {% endif %}
+  {% for article in articles %}
+  <div>
+    <a href="{% url 'articles:detail' article.pk %}"><h3>{{ article.pk }} detail</h3></a>
+    <span>{{ article.title }}</span>
+    <span>{{ article.content }}</span>
+    {% if article.image %}
+      <img src="{{ article.image.url }}" alt="{{ article.image }}" style="width: 20rem;">
+    {% endif %}
+  </div>
+  {% endfor %}
+{% endblock gumi02 %}

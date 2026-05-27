@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block gumi02 %}
+   <h2>index.html</h2>
+   <a href="{% url 'articles:create' %}">create</a>
+  {% for article in articles %}
+  <div>
+    <a href="{% url 'articles:detail' article.pk %}"><h3>{{ article.pk }} detail</h3></a>
+    <span>{{ article.title }}</span>
+    <span>{{ article.content }}</span>
+    <img src="{{ article.image.url }}" alt="{{ article.image }}" style="width: 20rem;">
+  </div>
+  {% endfor %}
+{% endblock gumi02 %}

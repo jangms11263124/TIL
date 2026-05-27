@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block gumi02 %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <h2>update.html</h2>
+  {% comment %} 1. form 태그 만들고 {% endcomment %}
+  {% comment %} 4. action과 method 지정 {% endcomment %}
+  {% comment %} 4-2. "{% url '갈곳:별명' %}" {% endcomment %}
+  <form action="{% url 'articles:update' article.pk  %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% comment %} 2. views에서 전달받은 form을 보여주고 {% endcomment %}
+    {{ form.as_p }}
+    {% comment %} 3. 제출 버튼 만들기  {% endcomment %}
+    <input type="submit" value="update-input">
+    {% comment %} <button>update-button</button> {% endcomment %}
+  </form>
+{% endblock gumi02 %}

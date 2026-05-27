@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  {% if request.user.is_authenticated %}
+  {{ request.user.username }} 님 안녕하세요.
+  <form action="{% url "accounts:logout" %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="logout">
+  </form>
+  {% else %}
+  로그인부터 해주세요. 
+  <a href="{% url "accounts:login" %}">login</a>
+  <a href="{% url "accounts:signup" %}">signup</a>
+  {% endif %}
+  <form action="{% url "accounts:delete" %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="delete">
+  </form>
+  
+{% endblock content %}
+

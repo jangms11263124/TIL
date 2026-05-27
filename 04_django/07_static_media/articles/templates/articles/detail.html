@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h2>{{ article.pk }}번째 detail</h2>
+  <div>
+    <li>{{ article.pk }}</li>
+    <li>{{ article.title }}</li>
+    <li>{{ article.content }}</li>
+    <li>{{ article.created_at }}</li>
+    <li>{{ article.updated_at }}</li>
+    <li>{{ article.image }}</li>
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  </div>
+  <hr>
+
+{% endblock  %}

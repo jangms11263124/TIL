@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h2>{{ article.pk }}번째 detail</h2>
+  <div>
+    {{ article.pk }}
+    {{ article.title }}
+    {{ article.content }}
+    {{ article.created_at }}
+    {{ article.updated_at }}
+  </div>
+  <hr>
+
+{% endblock  %}
