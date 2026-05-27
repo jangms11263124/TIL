@@ -13,6 +13,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+__init__.py
 
 # External tool builders
 .externalToolBuilders/
