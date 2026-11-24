@@ -22,7 +22,7 @@ API 응답 성공 시 로더 비활성화
 
 
 Inifinite Scrolling (DOM 조작 심화)
- 📌 *Intersection Observer API를 사용합니다.
+ *Intersection Observer API를 사용합니다.
 브라우저의 스크롤을 최하단으로 내릴 때마다 추가 API 요청
 API 응답 결과가 오기까지 화면에 로더 활성화
 API 응답 성공 시 로더 비활성화
