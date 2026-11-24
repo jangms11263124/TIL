@@ -1,7 +1,6 @@
 # Apache Hadoop (분산 저장 및 배치 처리 프레임워크)
 
 - **Category:** #Hadoop #DataEngineering #BigData
-- **Time:** (학습 시간 기입)
 
 <br>
 

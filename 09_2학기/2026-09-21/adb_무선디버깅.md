@@ -1,7 +1,6 @@
 # adb 무선 디버깅으로 실기기 연결하기
 
 - **Category:** #Android #Flutter #adb #Debugging
-- **Time:** (학습 시간 기입)
 
 <br>
 

@@ -1,7 +1,6 @@
 # vLLM으로 LLM 추론 빠르게 하기
 
 - **Category:** #AI #LLM #Serving #vLLM
-- **Time:** (학습 시간 기입)
 
 <br>
 

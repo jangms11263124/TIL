@@ -1,7 +1,6 @@
 # LoRA와 QLoRA로 작은 LLM 파인튜닝하기
 
 - **Category:** #AI #LLM #PEFT #LoRA
-- **Time:** (학습 시간 기입)
 
 <br>
 

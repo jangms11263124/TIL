@@ -1,7 +1,6 @@
 # 타이머가 있는 화면의 Flutter 위젯 테스트
 
 - **Category:** #Flutter #Test #WidgetTest
-- **Time:** (학습 시간 기입)
 
 <br>
 

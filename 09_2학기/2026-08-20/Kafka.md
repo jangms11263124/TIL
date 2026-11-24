@@ -1,7 +1,6 @@
 # Apache Kafka (분산 이벤트 스트리밍 플랫폼)
 
 - **Category:** #Kafka #DataEngineering #MessageQueue
-- **Time:** (학습 시간 기입)
 
 <br>
 

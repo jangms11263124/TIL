@@ -1,7 +1,6 @@
 # 서버 시각 문자열과 기기 타임존
 
 - **Category:** #Flutter #Dart #DateTime #Timezone
-- **Time:** (학습 시간 기입)
 
 <br>
 

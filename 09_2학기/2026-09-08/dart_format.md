@@ -1,7 +1,6 @@
 # dart format은 고친 파일에만 돌리기
 
 - **Category:** #Flutter #Dart #Git #협업
-- **Time:** (학습 시간 기입)
 
 <br>
 

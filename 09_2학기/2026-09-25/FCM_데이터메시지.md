@@ -1,7 +1,6 @@
 # FCM 알림 메시지와 데이터 메시지, 그리고 폴링 보완
 
 - **Category:** #Flutter #Firebase #FCM #Push
-- **Time:** (학습 시간 기입)
 
 <br>
 

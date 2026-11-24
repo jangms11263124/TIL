@@ -1,7 +1,6 @@
 # A2A (Agent2Agent Protocol)
 
 - **Category:** #AIAgent #A2A #Protocol
-- **Time:** (학습 시간 기입)
 
 <br>
 

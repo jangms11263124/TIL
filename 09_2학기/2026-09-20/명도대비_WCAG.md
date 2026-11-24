@@ -1,7 +1,6 @@
 # 글자 명도 대비 기준 (WCAG)
 
 - **Category:** #UI #접근성 #WCAG #Design
-- **Time:** (학습 시간 기입)
 
 <br>
 

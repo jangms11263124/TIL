@@ -1,7 +1,6 @@
 # 앱에 CAPTCHA 붙이기: 비밀키는 서버에 둔다
 
 - **Category:** #Security #Flutter #CAPTCHA #API
-- **Time:** (학습 시간 기입)
 
 <br>
 
