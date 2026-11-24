@@ -1,0 +1,67 @@
+{% extends 'community/base.html' %}
+
+{% block title %}회원가입 - 금융 자산 커뮤니티{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+  <h1 class="page-title">회원가입</h1>
+  <p class="breadcrumb">새로운 계정을 만들고 맞춤형 정보를 확인하세요.</p>
+  
+  <form action="{% url 'accounts:signup' %}" method="POST" enctype="multipart/form-data" class="mt-2">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+      <div class="messages" style="margin-bottom: 1rem;">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    {% for field in form %}
+      <div class="mb-0" style="margin-bottom: 1.25rem;">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div style="color: var(--color-danger); font-size: 0.8rem; margin-top: 0.25rem;">
+            {{ field.errors.0 }}
+          </div>
+        {% endif %}
+        {% if field.help_text %}
+          <small class="text-muted" style="display: block; margin-top: 0.25rem;">{{ field.help_text|safe }}</small>
+        {% endif %}
+      </div>
+    {% endfor %}
+    
+    <div class="mt-2">
+      <button type="submit" class="btn" style="width: 100%; padding: 0.75rem;">가입하기</button>
+    </div>
+  </form>
+  
+  <div class="mt-2" style="text-align: center; font-size: 0.875rem;">
+    이미 계정이 있으신가요? <a href="{% url 'accounts:login' %}">로그인</a>
+  </div>
+</div>
+
+<style>
+  input[type="text"], input[type="password"], input[type="file"], select, textarea {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn);
+    font-size: 0.9375rem;
+  }
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li label {
+    display: inline-block;
+    font-weight: 400;
+  }
+</style>
+{% endblock %}

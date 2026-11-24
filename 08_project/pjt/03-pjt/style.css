@@ -1,0 +1,39 @@
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* F301: 프로필 사진 타원/원 모양 및 그림자 속성 활용 */
+.profile-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.15);
+    margin-bottom: 20px;
+}
+
+/* 각 섹션을 감싸는 카드 스타일 */
+.section-card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+* {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}
+
+/* F305: Media Query를 활용한 반응형 레이아웃 구성 */
+/* 화면 사이즈가 767.98px 이하(모바일)일 때 우측 패널 상단 여백 추가 */
+@media (max-width: 767.98px) {
+    .right-panel {
+        margin-top: 2rem;
+    }
+}

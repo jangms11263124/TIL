@@ -1,0 +1,179 @@
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">FinEdu 프로젝트 간트 차트 — 총 10일 일정, 기획·설계, 백엔드, 프론트엔드, 마무리 4단계 구성</h2>
+
+<style>
+  .gantt-wrap { padding: 1rem 0 2rem; font-family: var(--font-sans); }
+  .gantt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .gantt-title { font-size: 17px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+  .gantt-subtitle { font-size: 13px; color: var(--color-text-secondary); margin: 2px 0 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--color-text-secondary); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .gantt-table { width: 100%; border-collapse: collapse; }
+  .gantt-table th { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-align: center; padding: 4px 2px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .gantt-table th.label-col { text-align: left; }
+  .gantt-table td { padding: 3px 2px; vertical-align: middle; }
+  .gantt-table td.label-col { font-size: 13px; color: var(--color-text-primary); padding-right: 10px; white-space: nowrap; min-width: 180px; }
+  .gantt-table td.wbs-col { font-size: 11px; color: var(--color-text-secondary); padding-right: 8px; white-space: nowrap; width: 40px; }
+  .gantt-table td.dur-col { font-size: 11px; color: var(--color-text-secondary); text-align: right; padding-left: 8px; white-space: nowrap; width: 36px; }
+  .gantt-table .section-row td { padding-top: 14px; padding-bottom: 2px; }
+  .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .phase-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .bar-cell { position: relative; height: 28px; }
+  .bar { position: absolute; top: 50%; transform: translateY(-50%); height: 18px; border-radius: 3px; }
+  .day-grid { position: absolute; top: 0; bottom: 0; pointer-events: none; }
+  .grid-line { position: absolute; top: 0; bottom: 0; width: 0.5px; background: var(--color-border-tertiary); }
+  .day-col { width: 32px; }
+  .today-marker { position: absolute; top: -4px; bottom: -4px; width: 1.5px; background: #E24B4A; opacity: 0.6; border-radius: 1px; }
+</style>
+
+<div class="gantt-wrap">
+  <div class="gantt-header">
+    <div>
+      <p class="gantt-title">FinEdu 프로젝트 간트 차트</p>
+      <p class="gantt-subtitle">구미_2반_8조 · 2026.05.29 기준 · 총 10일 일정 (D+1 ~ D+10)</p>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#534AB7;"></span>기획·설계</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#0F6E56;"></span>백엔드 개발</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#185FA5;"></span>프론트엔드 개발</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#854F0B;"></span>통합 테스트·배포</span>
+    </div>
+  </div>
+
+  <table class="gantt-table">
+    <thead>
+      <tr>
+        <th class="label-col" style="width:40px;">WBS</th>
+        <th class="label-col">작업명</th>
+        <th class="day-col">D1</th>
+        <th class="day-col">D2</th>
+        <th class="day-col">D3</th>
+        <th class="day-col">D4</th>
+        <th class="day-col">D5</th>
+        <th class="day-col">D6</th>
+        <th class="day-col">D7</th>
+        <th class="day-col">D8</th>
+        <th class="day-col">D9</th>
+        <th class="day-col">D10</th>
+        <th class="dur-col">기간</th>
+      </tr>
+    </thead>
+    <tbody id="gantt-body"></tbody>
+  </table>
+</div>
+
+<script>
+const PHASE_COLORS = {
+  plan: { bar: '#7F77DD', badge_bg: '#EEEDFE', badge_txt: '#3C3489' },
+  back: { bar: '#1D9E75', badge_bg: '#E1F5EE', badge_txt: '#085041' },
+  front: { bar: '#378ADD', badge_bg: '#E6F1FB', badge_txt: '#0C447C' },
+  test: { bar: '#BA7517', badge_bg: '#FAEEDA', badge_txt: '#633806' },
+};
+
+const tasks = [
+  { section: true, wbs: '1.1', label: '프로젝트 기획 및 설계', phase: 'plan', phaseLabel: '기획·설계', start: 1, end: 2 },
+  { wbs: '1.1.1', label: '아이디어 구체화 / 요구사항 정의', phase: 'plan', start: 1, end: 1.5 },
+  { wbs: '1.1.2', label: '데이터셋·API 조사', phase: 'plan', start: 1.5, end: 2 },
+  { wbs: '1.1.3', label: 'ERD / Use Case / 와이어프레임 작성', phase: 'plan', start: 2, end: 3 },
+  { section: true, wbs: '1.2', label: '백엔드 개발 (Django REST Framework)', phase: 'back', phaseLabel: '백엔드', start: 3, end: 7 },
+  { wbs: '1.2.1', label: '회원 인증 (로그인·회원가입)', phase: 'back', start: 3, end: 3.5 },
+  { wbs: '1.2.2', label: '금융감독원 API 연동', phase: 'back', start: 3.5, end: 4.5 },
+  { wbs: '1.2.3', label: '콘텐츠 추천 알고리즘 구현', phase: 'back', start: 4.5, end: 5.5 },
+  { wbs: '1.2.4', label: '커뮤니티 API (댓글·좋아요·랭킹)', phase: 'back', start: 5.5, end: 6 },
+  { wbs: '1.2.5', label: 'AI API 연동 (Claude / GPT / Gemini)', phase: 'back', start: 6, end: 7 },
+  { wbs: '1.2.6', label: '동갑내기 더미데이터 생성 (3,000개+)', phase: 'back', start: 7, end: 7.5, tbd: true },
+  { section: true, wbs: '1.3', label: '프론트엔드 개발 (Vue.js)', phase: 'front', phaseLabel: '프론트엔드', start: 3, end: 9 },
+  { wbs: '1.3.1', label: '공통 레이아웃·라우팅 설정', phase: 'front', start: 3, end: 3.5 },
+  { wbs: '1.3.2', label: '홈·콘텐츠 목록·상세 페이지', phase: 'front', start: 3.5, end: 4.5 },
+  { wbs: '1.3.3', label: 'AI 금융 상품 추천·비교 페이지', phase: 'front', start: 4.5, end: 5 },
+  { wbs: '1.3.4', label: '퀴즈·캘린더·AI 추천 카드 페이지', phase: 'front', start: 5, end: 6 },
+  { wbs: '1.3.5', label: '지도 API 연동 (오프라인 강의)', phase: 'front', start: 6, end: 6.5 },
+  { wbs: '1.3.6', label: '프로필·커뮤니티 페이지', phase: 'front', start: 6.5, end: 7 },
+  { wbs: '1.3.7', label: '동갑내기 자산 순위 페이지', phase: 'front', start: 7, end: 7.5, tbd: true },
+  { section: true, wbs: '1.4', label: '통합 테스트 및 배포', phase: 'test', phaseLabel: '마무리', start: 9, end: 10 },
+  { wbs: '1.4.1', label: '기능 통합 테스트·버그 수정', phase: 'test', start: 9, end: 9.5 },
+  { wbs: '1.4.2', label: 'README·GitLab 최종 제출', phase: 'test', start: 9.5, end: 10 },
+];
+
+const TOTAL_DAYS = 10;
+const CELL_W = 32;
+
+function pct(val) { return ((val - 1) / TOTAL_DAYS * 100).toFixed(2) + '%'; }
+function pctW(dur) { return (dur / TOTAL_DAYS * 100).toFixed(2) + '%'; }
+
+const tbody = document.getElementById('gantt-body');
+
+tasks.forEach(t => {
+  const tr = document.createElement('tr');
+  if (t.section) tr.className = 'section-row';
+
+  const dur = t.end - t.start;
+  const color = PHASE_COLORS[t.phase];
+
+  const barOpacity = t.section ? '1' : '0.82';
+  const barH = t.section ? '20px' : '16px';
+  const borderRadius = t.section ? '4px' : '3px';
+
+  const durText = dur === 1 ? '1일' : dur % 1 === 0 ? dur + '일' : dur + '일';
+
+  let labelHtml = '';
+  if (t.section) {
+    labelHtml = `<span class="section-label">${t.label}</span>
+      <span class="phase-badge" style="background:${color.badge_bg};color:${color.badge_txt};">${t.phaseLabel}</span>`;
+  } else {
+    const indent = '&nbsp;&nbsp;&nbsp;&nbsp;';
+    const tbdBadge = t.tbd ? `<span style="font-size:10px;color:#888;margin-left:5px;">TBD</span>` : '';
+    labelHtml = `${indent}<span style="font-size:13px;color:var(--color-text-secondary);">${t.label}</span>${tbdBadge}`;
+  }
+
+  const barLeft = ((t.start - 1) / TOTAL_DAYS * 100).toFixed(2) + '%';
+  const barWidth = ((t.end - t.start) / TOTAL_DAYS * 100).toFixed(2) + '%';
+
+  const barOpacityVal = t.tbd ? 0.5 : (t.section ? 1 : 0.85);
+
+  const gridLines = Array.from({ length: TOTAL_DAYS - 1 }, (_, i) =>
+    `<div class="grid-line" style="left:${((i + 1) / TOTAL_DAYS * 100).toFixed(2)}%;"></div>`
+  ).join('');
+
+  tr.innerHTML = `
+    <td class="wbs-col">${t.wbs}</td>
+    <td class="label-col">${labelHtml}</td>
+    <td class="bar-cell" colspan="${TOTAL_DAYS}" style="padding:0;">
+      <div style="position:relative;width:100%;height:28px;">
+        ${gridLines}
+        <div class="bar" style="
+          left:${barLeft};
+          width:${barWidth};
+          height:${t.section ? '20px' : '16px'};
+          background:${color.bar};
+          opacity:${barOpacityVal};
+          border-radius:${t.section ? '4px' : '3px'};
+        "></div>
+      </div>
+    </td>
+    <td class="dur-col">${dur % 1 === 0 ? dur + '일' : dur + '일'}</td>
+  `;
+
+  tbody.appendChild(tr);
+
+  if (!t.section) {
+    const sep = document.createElement('tr');
+    sep.innerHTML = `<td colspan="13" style="padding:0;height:1px;"></td>`;
+    tbody.appendChild(sep);
+  }
+});
+
+const submitRow = document.createElement('tr');
+submitRow.innerHTML = `
+  <td colspan="2" style="padding-top:14px;font-size:12px;font-weight:500;color:#E24B4A;">최종 제출 마감</td>
+  <td class="bar-cell" colspan="10" style="padding:0;padding-top:14px;">
+    <div style="position:relative;width:100%;height:24px;">
+      <div style="position:absolute;left:99%;top:0;bottom:0;width:2px;background:#E24B4A;border-radius:1px;opacity:0.8;"></div>
+      <div style="position:absolute;left:calc(99% + 3px);top:50%;transform:translateY(-50%);font-size:11px;color:#E24B4A;white-space:nowrap;">D+10 18:00</div>
+    </div>
+  </td>
+  <td></td>
+`;
+tbody.appendChild(submitRow);
+</script>

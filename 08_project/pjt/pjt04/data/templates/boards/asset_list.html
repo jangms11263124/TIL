@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header-section" style="margin-bottom: 30px;">
+    <h1 style="margin:0;">투자할 자산을 선택하세요</h1>
+    <p style="color: var(--text-muted); margin-top: 5px;">다양한 금융 자산에 대한 의견을 나누어 보세요.</p>
+</div>
+
+<div class="grid">
+    {% for asset in assets %}
+    <a href="{% url 'boards:board_list' asset.id %}" class="card">
+        <span class="asset-category">{{ asset.category }} (위험도: {{ asset.risk_level }})</span>
+        <h2 class="asset-name">{{ asset.name }}</h2>
+        <p class="asset-desc">{{ asset.description }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'community/base.html' %}
+
+{% block title %}로그인 - 금융 자산 커뮤니티{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 0 auto; padding: 1rem 0;">
+  <h1 class="page-title" style="text-align: center;">로그인</h1>
+  <p class="breadcrumb" style="text-align: center;">다시 오신 것을 환영합니다.</p>
+  
+  <form action="{% url 'accounts:login' %}" method="POST" class="mt-2">
+    {% csrf_token %}
+    
+    {% for field in form %}
+      <div style="margin-bottom: 1.25rem;">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div style="color: var(--color-danger); font-size: 0.8rem; margin-top: 0.25rem;">
+            {{ field.errors.0 }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    
+    <div class="mt-2">
+      <button type="submit" class="btn" style="width: 100%; padding: 0.75rem;">로그인</button>
+    </div>
+  </form>
+  
+  <div class="mt-2" style="text-align: center; font-size: 0.875rem;">
+    계정이 없으신가요? <a href="{% url 'accounts:signup' %}">회원가입</a>
+  </div>
+</div>
+
+<style>
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn);
+    font-size: 0.9375rem;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,174 @@
+
+<style>
+#erd-wrap { padding: 8px 0; }
+#erd-wrap svg { display: block; max-width: 100%; }
+#erd .nodeLabel { font-family: "Anthropic Sans", sans-serif !important; }
+</style>
+<div id="erd-wrap">
+  <div id="erd"></div>
+</div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '12px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#2d2b3d' : '#EEEDFE',
+    primaryBorderColor: dark ? '#534AB7' : '#7F77DD',
+    primaryTextColor: dark ? '#c2c0b6' : '#3d3d3a',
+    secondaryColor: dark ? '#1a2a24' : '#E1F5EE',
+    secondaryBorderColor: dark ? '#0F6E56' : '#1D9E75',
+    tertiaryColor: dark ? '#2a1f18' : '#FAECE7',
+    tertiaryBorderColor: dark ? '#993C1D' : '#D85A30',
+  },
+});
+const diagram = `erDiagram
+  User {
+    int id PK
+    string username
+    string email
+    string password_hash
+    int age
+    string gender
+    string interest_category
+    datetime joined_at
+  }
+  ContentCategory {
+    int id PK
+    string name
+    string target_age_group
+    string description
+  }
+  EducationContent {
+    int id PK
+    string title
+    string content_type
+    string url
+    string youtube_video_id
+    string difficulty
+    int category_id FK
+    int likes_count
+  }
+  FinancialProduct {
+    int id PK
+    string product_type
+    string bank_name
+    float rate
+    string conditions
+    string api_source
+  }
+  Comment {
+    int id PK
+    int content_id FK
+    int user_id FK
+    text text
+    datetime created_at
+  }
+  Like {
+    int id PK
+    int user_id FK
+    int content_id FK
+    datetime created_at
+  }
+  OfflineLecture {
+    int id PK
+    string title
+    string location
+    float lat
+    float lng
+    date lecture_date
+    string organizer
+  }
+  AttendanceCalendar {
+    int id PK
+    int user_id FK
+    date attendance_date
+    bool is_quiz_correct
+    bool color_marked
+  }
+  AIRecommendation {
+    int id PK
+    int user_id FK
+    string rec_type
+    text input_context
+    json result_items
+    datetime created_at
+  }
+  EconomicTerm {
+    int id PK
+    string term
+    text definition
+    text example
+  }
+  PeerAssetProfile {
+    int id PK
+    int age
+    string gender
+    string asset_type
+    int asset_amount
+    float percentile
+    bool is_dummy
+  }
+  FinancialMBTI {
+    int id PK
+    int user_id FK
+    string mbti_type
+    text result_desc
+    datetime created_at
+  }
+
+  User ||--o{ Comment : "writes"
+  User ||--o{ Like : "gives"
+  User ||--o{ AttendanceCalendar : "has"
+  User ||--o{ AIRecommendation : "receives"
+  User ||--o{ FinancialMBTI : "takes"
+  User }o--o{ ContentCategory : "interests"
+  User }o--o{ EducationContent : "views"
+  User }o--o{ OfflineLecture : "attends"
+  ContentCategory ||--o{ EducationContent : "contains"
+  EducationContent ||--o{ Comment : "has"
+  EducationContent ||--o{ Like : "receives"
+  AIRecommendation }o--o{ FinancialProduct : "recommends"
+`;
+
+const { svg } = await mermaid.render('erd-svg', diagram);
+document.getElementById('erd').innerHTML = svg;
+
+document.querySelectorAll('#erd svg .node').forEach(node => {
+  const firstPath = node.querySelector('path[d]');
+  if (!firstPath) return;
+  const d = firstPath.getAttribute('d');
+  const nums = d.match(/-?[\d.]+/g)?.map(Number);
+  if (!nums || nums.length < 8) return;
+  const xs = [nums[0], nums[2], nums[4], nums[6]];
+  const ys = [nums[1], nums[3], nums[5], nums[7]];
+  const x = Math.min(...xs), y = Math.min(...ys);
+  const w = Math.max(...xs) - x, h = Math.max(...ys) - y;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', x); rect.setAttribute('y', y);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('rx', '8');
+  for (const a of ['fill', 'stroke', 'stroke-width', 'class', 'style']) {
+    if (firstPath.hasAttribute(a)) rect.setAttribute(a, firstPath.getAttribute(a));
+  }
+  firstPath.replaceWith(rect);
+});
+
+document.querySelectorAll('#erd svg .row-rect-odd path, #erd svg .row-rect-even path').forEach(p => {
+  p.setAttribute('stroke', 'none');
+});
+
+const svgEl = document.querySelector('#erd svg');
+if (svgEl) {
+  svgEl.style.width = '100%';
+  svgEl.style.height = 'auto';
+}
+</script>

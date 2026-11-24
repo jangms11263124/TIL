@@ -583,3 +583,15 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,venv,node,visualstudiocode,pycharm,windows,django
+### TIL: 공개하지 않는 것 ###
+# SSAFY 교육 자료 원본(강의 코드·관통 가이드·PDF)과 개인 GitLab 사본
+ssafy/
+**/15기_*/
+# FinEdu 최종본은 별도 레포(jangms11263124/finedu)에 있음
+08_project/pjt/13-pjt/
+# 실행 파일·문서 원본
+*.exe
+*.pdf
+*.docx
+*.pptx
+**/chromedriver-win64/

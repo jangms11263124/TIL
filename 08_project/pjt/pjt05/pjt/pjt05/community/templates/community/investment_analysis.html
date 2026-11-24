@@ -1,0 +1,23 @@
+{% extends 'community/base.html' %}
+
+{% block title %}투자 성향 분석 - 금융 자산 커뮤니티{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+  <h1 class="page-title">AI 투자 성향 분석</h1>
+  <p class="breadcrumb">작성하신 게시글 {{ posts_count }}개를 기반으로 분석한 결과입니다.</p>
+  
+  <div class="analysis-card" style="background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 100%); border: 1px solid var(--color-primary-light); padding: 2rem; border-radius: var(--radius); margin-top: 2rem; box-shadow: var(--shadow-md);">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="font-size: 2rem;">🤖</div>
+      <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--color-primary);">분석 리포트</h2>
+    </div>
+    
+    <div style="line-height: 1.8; color: var(--color-text); white-space: pre-wrap;">{{ analysis_result }}</div>
+  </div>
+  
+  <div class="mt-2" style="text-align: center;">
+    <a href="{% url 'accounts:profile' user.username %}" class="btn btn-secondary">프로필로 돌아가기</a>
+  </div>
+</div>
+{% endblock %}

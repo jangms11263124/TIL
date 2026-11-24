@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+        <a href="{% url 'boards:asset_list' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 600; margin-bottom: 10px; display: inline-block;">&larr; 다른 자산 보기</a>
+        <h1 style="margin: 0; font-size: 2.2rem;">{{ asset.name }} 게시판</h1>
+        <p style="color: var(--text-muted); margin-top: 5px; max-width: 600px;">{{ asset.description }}</p>
+    </div>
+    <a href="{% url 'boards:post_create' asset.id %}" class="btn btn-primary">글쓰기</a>
+</div>
+
+<div class="card" style="padding: 0; overflow: hidden;">
+    {% if posts %}
+        {% for post in posts %}
+        <a href="{% url 'boards:post_detail' asset.id post.pk %}" class="post-item">
+            <div>
+                <div class="post-title">{{ post.title }}</div>
+                <div class="post-meta">{{ post.author }} · {{ post.created_at|date:"Y.m.d H:i" }}</div>
+            </div>
+        </a>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <h3 style="margin-bottom: 10px;">아직 작성된 글이 없습니다</h3>
+            <p>이 자산에 대한 첫 번째 의견을 남겨보세요!</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

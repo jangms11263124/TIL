@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .font-crimson {
+      color: crimson;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="heading">Hover me!</h1>
+  <h2 class="sub-heading">Double Click me!</h2>
+  <p class="contents">Lorem ipsum dolor sit amet consectetur</p>
+
+  <script>
+    const randomTexts = [
+      'Lorem ipsum dolor sit amet consectetu',
+      'adipisicing elit. Repellendus delectus quam',
+      'similique quo ipsam maxime totam alias',
+      'quibusdam repudiandae voluptas dicta',
+      'voluptas voluptatibus exercitationem officiis'
+    ]
+
+    // 아래에 코드 작성
+    const h1Tag =  document.querySelector("h1")
+    const h2Tag = document.querySelector("h2")
+    const pTag = document.querySelector("p")
+
+    // h1 요소: 마우스 올라가면 새 문자열, 나가면 원래 문자열로 변경
+    const originalH1Text = h1Tag.textContent;
+    const hoverHandler = function(event) {
+      if (event.type === "mouseenter") {
+        h1Tag.textContent = "I am being hovered!";
+      } else if (event.type === "mouseleave") {
+        h1Tag.textContent = originalH1Text;
+      }
+    }
+    
+    // h2 요소: 더블클릭하면 폰트 컬러 crimson 토글
+    const dblclickHandler = function(event) {
+      h2Tag.classList.toggle("font-crimson");
+    }
+    
+    // p 요소: 마우스 휠 움직이면 랜덤 문자열 표시
+    const wheelHandler = function(event) {
+      const randomIndex = Math.floor(Math.random() * randomTexts.length);
+      pTag.textContent = randomTexts[randomIndex];
+    }
+
+    h1Tag.addEventListener("mouseenter", hoverHandler)
+    h1Tag.addEventListener("mouseleave", hoverHandler)
+    h2Tag.addEventListener("dblclick", dblclickHandler)
+    pTag.addEventListener("wheel", wheelHandler)
+  </script>
+</body>
+
+</html>

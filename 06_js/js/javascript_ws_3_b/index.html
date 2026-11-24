@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 아래에 코드 작성
+    
+    // 객체 person
+    const person = {
+      name: 'Alice',
+      age: 30,
+      city: 'New York',
+      introduce() {
+        return `안녕하세요 ${this.city}에 거주하는 ${this.age}살 ${this.name}입니다.`;
+      }
+    };
+    
+    // 함수 printPersonInfo - 구조 분해 할당
+    function printPersonInfo({ name, age, city }) {
+      console.log(`${name} / ${age} / ${city}`);
+    }
+
+    console.log(person.introduce())
+    printPersonInfo(person)
+</body>
+
+</html>

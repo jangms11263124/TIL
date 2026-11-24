@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ count }}</h1>
+    <button v-on:click="increment">+</button>
+    <button v-on:click="decrement">-</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        // 정수 0을 가지는 반응형 변수 count 선언
+        const count = ref(0)
+
+        // count의 값을 1만큼 증가시키는 함수
+        const increment = function() {
+          count.value += 1
+        }
+
+        // count의 값을 1만큼 감소시키는 함수
+        const decrement = function() {
+          count.value -= 1
+        }
+
+        return {
+          count,
+          increment,
+          decrement,
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

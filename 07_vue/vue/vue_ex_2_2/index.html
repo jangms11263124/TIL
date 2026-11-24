@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>설문조사</h1>
+
+    <form @submit.prevent="submitForm">
+      <div>
+        <label for="name">이름: </label>
+        <input id="name" type="text" v-model="formData.name">
+        <!-- IME 이슈 보완하기
+        v-model대신에 v-bind와 v-on 함께 사용하기
+        $event: 이벤트 객체 정보 -->
+        <!-- <input id="name" type="text" :value="formData.name" @input="formData.name = $event.target.value"> -->
+      </div>
+
+      <div>
+        <label for="email">이메일: </label>
+        <input id="email" type="email" v-model="formData.email">
+      </div>
+
+      <div>
+        <label for="age">나이: </label>
+        <input id="age" type="number" v-model="formData.age">
+      </div>
+
+      <div>
+        <!-- select -->
+        <label for="residence">거주지: </label>
+        <select id="residence" v-model="formData.residence" required>
+          <option value="" disabled selected>거주지를 선택하시오.</option>
+          <option>서울</option>
+          <option>경기</option>
+          <option>충청</option>
+          <option>전라</option>
+          <option>경상</option>
+        </select>
+      </div>
+
+      <div>
+        <!-- checkbox -->
+        <label>사용하는 언어: </label>
+        <div>
+          <input type="checkbox" id="python" value="Python" v-model="formData.languages">
+          <label for="python">Python</label>
+        </div>
+        <div>
+          <input type="checkbox" id="javascript" value="JavaScript" v-model="formData.languages">
+          <label for="javascript">JavaScript</label>
+        </div>
+        <div>
+          <input type="checkbox" id="csharp" value="C#" v-model="formData.languages">
+          <label for="csharp">C#</label>
+        </div>
+        <div>
+          <input type="checkbox" id="ruby" value="Ruby" v-model="formData.languages">
+          <label for="ruby">Ruby</label>
+        </div>
+      </div>
+      <input type="submit" value="제출">
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, reactive } = Vue
+
+    const app = createApp({
+      setup() {
+        // reactive를 사용한 이유
+        // 1. 여러 개의 연관된 입력 필드가 하나의 그룹으로 묶여있을때
+        //    가독성과 유지보수 면에서 유리
+        // 2. .value 생략가능
+        const formData = reactive({
+          name: '',
+          email: '',
+          age: null,
+          residence: '',
+          languages: []
+        })
+
+        const submitForm = () => {
+          console.log(formData.name)
+          console.log(formData.email)
+          console.log(formData.age)
+          console.log(formData.residence)
+          console.log(formData.languages)
+        }
+
+        return {
+          formData,
+          submitForm
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="article-header">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; position: relative;">
+        <div style="margin-bottom: 25px; display: inline-block;">
+            <a href="{% url 'boards:board_list' asset.id %}" style="display: inline-block; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 20px; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+                &larr; {{ asset.name }} 목록으로
+            </a>
+        </div>
+        <h1 class="article-title">{{ post.title }}</h1>
+        <div class="article-meta">
+            <span>🕒 {{ post.created_at|date:"Y.m.d H:i" }}</span>
+            <span style="margin: 0 10px; opacity: 0.5;">|</span>
+            <span>✍️ {{ post.author }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="article-body-wrapper">
+    <div class="card article-card">
+        <div class="post-content">
+            {{ post.content|safe }}
+        </div>
+        
+        <div class="actions" style="border-top: 1px solid var(--card-border); padding-top: 25px; margin-top: 50px; display: flex; justify-content: flex-end; gap: 12px;">
+            <a href="{% url 'boards:post_update' asset.id post.pk %}" class="btn btn-secondary">수정하기</a>
+            <form action="{% url 'boards:post_delete' asset.id post.pk %}" method="POST" style="display: inline;" onsubmit="return confirm('정말로 이 글을 삭제하시겠습니까?');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">삭제하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

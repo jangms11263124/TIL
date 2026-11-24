@@ -1,0 +1,44 @@
+[
+  {
+    "model": "finlife.DepositProducts",
+    "pk": 999,
+    "fields": {
+      "fin_prdt_cd": "DUMMY_001",
+      "kor_co_nm": "삼성싸피은행",
+      "fin_prdt_nm": "SSAFY 15기 열정 예금",
+      "join_way": "스마트폰, 인터넷",
+      "spcl_cnd": "SSAFY 교육생 인증 시 연 1.5%p 우대금리 제공",
+      "join_member": "만 19세 이상 실명의 개인",
+      "join_deny": 1,
+      "etc_note": "SSAFY 교육생 전용 특별 상품"
+    }
+  },
+  {
+    "model": "finlife.DepositProducts",
+    "pk": 1000,
+    "fields": {
+      "fin_prdt_cd": "DUMMY_002",
+      "kor_co_nm": "미래금융은행",
+      "fin_prdt_nm": "청년 자산 형성 정기예금",
+      "join_way": "영업점, 스마트폰",
+      "spcl_cnd": "첫 거래 고객 및 급여 이체 실적 충족 시 우대",
+      "join_member": "만 19세 ~ 34세 이하 청년",
+      "join_deny": 1,
+      "etc_note": "청년층 경제 자립 지원"
+    }
+  },
+  {
+    "model": "finlife.DepositProducts",
+    "pk": 1001,
+    "fields": {
+      "fin_prdt_cd": "DUMMY_003",
+      "kor_co_nm": "디지털뱅크",
+      "fin_prdt_nm": "알고리즘 플러스 예금",
+      "join_way": "스마트폰",
+      "spcl_cnd": "비대면 가입 전용, 자동 갱신 시 추가 금리",
+      "join_member": "실명의 개인 (1인 1계좌)",
+      "join_deny": 1,
+      "etc_note": "모바일 전용 간편 예금"
+    }
+  }
+]
