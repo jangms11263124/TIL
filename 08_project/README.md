@@ -1,4 +1,4 @@
-# Project (SSAFY)
+# SSAFY 관통 프로젝트
 
 SSAFY 1학기 관통 프로젝트(PJT) 실습 코드를 기록합니다.
 

@@ -24,7 +24,7 @@
 
 ## 예제 코드
 
-**1) Agent Card 조회 (디스커버리)** — 상대 에이전트가 뭘 할 수 있는지 먼저 확인
+**1) Agent Card 조회 (디스커버리)**: 상대 에이전트가 뭘 할 수 있는지 먼저 확인
 
 ```json
 // GET https://translator.example.com/.well-known/agent-card.json
@@ -57,7 +57,7 @@
 }
 ```
 
-**3) 응답 — Task로 감싸져서 돌아온다** (상태와 결과물이 분리되어 있음)
+**3) 응답: Task로 감싸져서 돌아온다** (상태와 결과물이 분리되어 있음)
 
 ```json
 {
@@ -93,4 +93,4 @@
 - [A2A 공식 스펙 문서](https://a2a-protocol.org/latest/specification/)
 - [GitHub - a2aproject/A2A](https://github.com/a2aproject/A2A)
 - [Google 발표 블로그 - Announcing the Agent2Agent Protocol](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
-- 함께 보기: MCP(Model Context Protocol)와의 비교 — 에이전트↔도구(MCP) vs 에이전트↔에이전트(A2A)
+- 함께 보기: MCP(Model Context Protocol)와 비교. MCP는 에이전트와 도구를, A2A는 에이전트끼리를 잇는다

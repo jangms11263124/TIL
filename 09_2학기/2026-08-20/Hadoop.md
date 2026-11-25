@@ -72,7 +72,7 @@ cat data.txt | python mapper.py | sort | python reducer.py
 ## 겪었던 문제 / 트러블슈팅
 
 - **헷갈렸던 점 1**: "요즘은 다 Spark 쓰는데 Hadoop은 죽은 기술 아닌가?"라고 생각했는데, Spark가 대체한 건 MapReduce 엔진이고 **HDFS와 YARN은 여전히 빅데이터 인프라의 기반**으로 쓰인다. (클라우드에선 HDFS 역할을 S3 같은 오브젝트 스토리지가 대신하는 추세)
-- **헷갈렸던 점 2**: HDFS에 작은 파일을 잔뜩 넣으면 안 되는 이유 — 블록·파일 하나당 메타데이터가 **NameNode의 메모리**에 올라가기 때문에, 1GB짜리 파일 1개보다 1MB짜리 파일 1024개가 NameNode에 훨씬 부담이다. 작은 파일은 합쳐서 저장하는 게 정석.
+- **헷갈렸던 점 2**: HDFS에 작은 파일을 잔뜩 넣으면 안 되는 이유. 블록·파일 하나당 메타데이터가 **NameNode의 메모리**에 올라가기 때문에, 1GB짜리 파일 1개보다 1MB짜리 파일 1024개가 NameNode에 훨씬 부담이다. 그래서 작은 파일은 합쳐서 저장한다.
 - **헷갈렸던 점 3**: reducer가 단순히 딕셔너리로 세면 되는 줄 알았는데, MapReduce에서는 **shuffle 단계가 key 정렬을 보장**해주기 때문에 위 예제처럼 "이전 key와 비교하는" 스트리밍 방식으로 메모리를 거의 안 쓰고 집계할 수 있다. 데이터가 메모리보다 클 수 있다는 전제가 설계에 깔려 있다.
 
 <br>
@@ -81,4 +81,4 @@ cat data.txt | python mapper.py | sort | python reducer.py
 
 - [Apache Hadoop 공식 문서](https://hadoop.apache.org/docs/stable/)
 - [HDFS Architecture](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
-- 함께 보기: [Kafka TIL](./Kafka.md) — 실시간 수집(Kafka) → 대용량 저장·배치 분석(HDFS)으로 이어지는 데이터 파이프라인 패턴
+- 함께 보기: [Kafka TIL](./Kafka.md). Kafka로 실시간 수집하고 HDFS에 쌓아 배치 분석하는 흐름으로 이어진다
